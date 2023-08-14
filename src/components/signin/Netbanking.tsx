@@ -31,7 +31,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const loginFormSchema = z.object({
@@ -43,12 +43,20 @@ const registerFormSchema = z.object({
   accountNumber: z.string().min(11).max(15),
   password: z.string().min(8),
   confirmPassword: z.string().min(8),
-  transactionPassword: z.string().min(8),
-  confirmTransactionPassword: z.string().min(8),
+  transactionPassword: z.string().min(5),
+  confirmTransactionPassword: z.string().min(5),
   otp: z.string().min(6).max(6)
+}).refine(data => data.transactionPassword === data.confirmTransactionPassword, {
+  message: "Transaction Passwords do not match",
+  path: ["confirmTransactionPassword"],
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
 })
 
 const Netbanking = () => {
+  const [activeTab, setActiveTab] = React.useState("login")
+  const navigate = useNavigate()
   const loginForm = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -72,17 +80,24 @@ const Netbanking = () => {
 
   function onLogin(values: z.infer<typeof loginFormSchema>) {
     console.log(values)
+    //TODO: handle login logic
+    navigate('/dashboard')
+
   }
 
   function onRegister(values: z.infer<typeof registerFormSchema>) {
     console.log(values)
+    const tempNetbankingId = Math.floor(Math.random() * 100000000000)
+
+    navigate(`/account-registration-success/${tempNetbankingId}`)
+    // setActiveTab("login")
   }
 
   return (
-    <Tabs defaultValue="login" className="w-[400px]">
+    <Tabs defaultValue="login" value={activeTab} className="w-[600px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="login">Login</TabsTrigger>
-        <TabsTrigger value="register">Register</TabsTrigger>
+        <TabsTrigger value="login" onClick={() => setActiveTab("login")}>Login</TabsTrigger>
+        <TabsTrigger value="register" onClick={() => setActiveTab("register")}>Register</TabsTrigger>
       </TabsList>
       <TabsContent value="login">
         <Card>
@@ -147,7 +162,7 @@ const Netbanking = () => {
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Form {...registerForm}>
-                <form onSubmit={registerForm.handleSubmit(onRegister)} className="space-y-8">
+                <form onSubmit={registerForm.handleSubmit(onRegister)} className="grid grid-cols-2 gap-y-3 gap-x-2">
                   <FormField
                     control={registerForm.control}
                     name="accountNumber"
