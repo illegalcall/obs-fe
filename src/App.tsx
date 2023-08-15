@@ -6,8 +6,10 @@ import CreateAccount from "./components/signin/CreateAccount"
 import AccountCreationSuccess from "./components/signin/AccountCreationSuccess"
 import { Toaster } from "@/components/ui/toaster"
 import AccountRegistrationSuccess from "./components/signin/AccountRegistrationSuccess"
-import Dashboard from "./components/dashboard/Dashboard"
+import Dashboard from "./components/dashboard"
 import Welcome from "./components/Welcome"
+import AccountDetails from "./components/dashboard/AccountDetails"
+import FundTransfer from "./components/dashboard/FundTransfer"
 function App() {
   return (
     <Router>
@@ -19,6 +21,8 @@ function App() {
           <Route path="/account-creation-success/:accountId" element={<AccountCreationSuccess />} />
           <Route path="/account-registration-success/:netbankingId" element={<AccountRegistrationSuccess />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/account-details" element={<AccountDetails />} />
+          <Route path="/fund-transfer" element={<FundTransfer />} />
         </Routes>
         <Toaster />
       </Layout>

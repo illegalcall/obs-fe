@@ -1,20 +1,48 @@
-import React from 'react'
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "../ui/button"
-import { useNavigate } from "react-router-dom"
+
+import { useStore } from "@/store"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 
 
 const Header = () => {
-  const navigate = useNavigate()
   //TODO: use store to see if user is logged in
-  const isUserLoggedIn = false
+  const [accountId, name, updateAccountId, updateName] = useStore(
+    (state) => [state.accountId, state.name, state.updateAccountId, state.updateName],
+  )
+  console.log("🚀 ~ file: Header.tsx:14 ~ Header ~ accountId:", accountId, name, updateAccountId, updateName)
+
+  const handleLogout = () => {
+    updateAccountId("")
+    updateName("")
+  }
+
   return (
     <div className="flex justify-between p-4 px-7 border-b-2 mb-8">
       <span className="text-5xl font-extrabold">OBS</span>
-      {isUserLoggedIn && <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>}
+      <DropdownMenu >
+        <DropdownMenuTrigger>{accountId && <Avatar>
+          {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
+          <AvatarFallback>{name.split(" ").map((n) => n.charAt(0)).join("")}</AvatarFallback>
+        </Avatar>}</DropdownMenuTrigger>
+        <DropdownMenuContent >
+          <DropdownMenuLabel>{name}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel>{accountId}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>Log out</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Button } from "@/components/ui/button"
 import {
@@ -32,6 +32,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Link, useNavigate } from 'react-router-dom'
+import { useStore } from "@/store"
 
 
 const loginFormSchema = z.object({
@@ -57,6 +58,18 @@ const registerFormSchema = z.object({
 const Netbanking = () => {
   const [activeTab, setActiveTab] = React.useState("login")
   const navigate = useNavigate()
+
+  const [accountId, updateAccountId, updateName] = useStore(
+    (state) => [state.accountId, state.updateAccountId, state.updateName],
+  )
+
+  useEffect(() => {
+    if (accountId !== "") {
+      console.log("hii")
+      navigate('/dashboard')
+    }
+  })
+
   const loginForm = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -80,8 +93,15 @@ const Netbanking = () => {
 
   function onLogin(values: z.infer<typeof loginFormSchema>) {
     console.log(values)
+    const tempId = Math.floor(Math.random() * 100000000000)
+    const tempName = "John Doe"
+    updateAccountId(tempId + '')
+    updateName(tempName)
+
+
     //TODO: handle login logic
     navigate('/dashboard')
+
 
   }
 
