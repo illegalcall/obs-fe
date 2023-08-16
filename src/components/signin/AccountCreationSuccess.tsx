@@ -2,6 +2,7 @@ import Copy from "@/icons/Copy"
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from "@/components/ui/use-toast"
+import { useStore } from "@/store"
 
 
 const AccountCreationSuccess = () => {
@@ -17,12 +18,18 @@ const AccountCreationSuccess = () => {
 
   }
 
-  const title = "Mr", firstName = "John", lastName = "Doe"
+  const [name] = useStore(
+    (state) => [state.name],
+  )
+
+  // const title = "Mr", firstName = "John", lastName = "Doe"
 
   return (
     <div className="text-center">
       <h2 className="pb-2 text-3xl font-semibold text-center">
-        Congratulations, {title} {firstName} {lastName} 🎉
+        {/* Congratulations, {title} {firstName} {lastName} 🎉 */}
+        Congratulations, {name} 🎉
+
       </h2>
       <p> Your account has been created successfully. </p>
       <p> Your account number is: <b>{accountId}</b> <Copy onClick={handleCopy} className="h-[30px] inline cursor-pointer" /> </p>
