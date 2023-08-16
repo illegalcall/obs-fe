@@ -1,11 +1,15 @@
 import React from 'react'
+import DashboardLayout from "./DashboardLayout"
+import withAuth from "../withAuth"
 
 const FundTransfer = () => {
   return (
-    <div>
-      FT
-    </div>
+    <DashboardLayout>
+      <div>
+        FT
+      </div>
+    </DashboardLayout>
   )
 }
 
-export default FundTransfer
+export default withAuth(FundTransfer)

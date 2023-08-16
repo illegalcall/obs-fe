@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const MenuItem: React.FC<{
   active: boolean
@@ -18,14 +18,14 @@ const MenuItem: React.FC<{
 
 const SideMenu = () => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const checkActive = (route: string) => {
-    // return pathname === route;
-    return true
+    return pathname === route
   }
   return (
     <div className="col-span-1">
-      <MenuItem active={checkActive('/account-detail')} name={'Account Detail'} onClick={() => navigate('/account-details')} />
-      <MenuItem active={checkActive('/fund-transfer')} name={"Fund Transfer"} onClick={() => navigate('fund-transfer')} />
+      <MenuItem active={checkActive('/account-details')} name={'Account Detail'} onClick={() => navigate('/account-details')} />
+      <MenuItem active={checkActive('/fund-transfer')} name={"Fund Transfer"} onClick={() => navigate('/fund-transfer')} />
     </div>
   )
 }

@@ -1,11 +1,15 @@
 import React from 'react'
+import DashboardLayout from "./DashboardLayout"
+import withAuth from "../withAuth"
 
 const AccountDetails = () => {
   return (
-    <div>
-      AD
-    </div>
+    <DashboardLayout>
+      <div>
+        AD
+      </div>
+    </DashboardLayout>
   )
 }
 
-export default AccountDetails
+export default withAuth(AccountDetails)

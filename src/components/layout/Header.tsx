@@ -19,7 +19,6 @@ const Header = () => {
   const [accountId, name, updateAccountId, updateName] = useStore(
     (state) => [state.accountId, state.name, state.updateAccountId, state.updateName],
   )
-  console.log("🚀 ~ file: Header.tsx:14 ~ Header ~ accountId:", accountId, name, updateAccountId, updateName)
 
   const handleLogout = () => {
     updateAccountId("")
@@ -40,7 +39,7 @@ const Header = () => {
           <DropdownMenuLabel>{accountId}</DropdownMenuLabel>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>Log out</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer text-red-500" onClick={handleLogout}>Log out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
