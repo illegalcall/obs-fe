@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useStore } from '@/store'
 
 const createAccountFormSchema = z.object({
   title: z.string(),
@@ -35,7 +37,7 @@ const createAccountFormSchema = z.object({
   dOB: z.string(),
   address: z.string(),
   occupationType: z.string(),
-  sourceofIncome: z.string(),
+  sourceOfIncome: z.string(),
   grossAnnualIncome: z.string(),
 })
 
@@ -54,16 +56,29 @@ const CreateAccount = () => {
       dOB: "",
       address: "",
       occupationType: "",
-      sourceofIncome: "",
+      sourceOfIncome: "",
       grossAnnualIncome: "",
     },
   })
 
+  const [accountId, updateAccountId, updateName] = useStore(
+    (state) => [state.accountId, state.updateAccountId, state.updateName],
+  )
 
-  function onCreateAccount(values: z.infer<typeof createAccountFormSchema>) {
+
+  async function onCreateAccount(values: z.infer<typeof createAccountFormSchema>) {
     console.log("Hello", values)
-    const tempAccountId = Math.floor(Math.random() * 100000000000)
-    navigate(`/account-creation-success/${tempAccountId}`)
+    // const tempAccountId = Math.floor(Math.random() * 100000000000)
+    
+    const resp = await axios.post("http://localhost:8080/user/register",values)
+    const data = resp.data;
+    const accId = data.split(",")[0];
+    const name = data.split(",")[1];
+    updateAccountId(accId + '')
+    updateName(name)
+    window.sessionStorage.setItem("accountId", accId+"");
+    window.sessionStorage.setItem("name", name);
+    navigate(`/account-creation-success/${accId}`)
   }
 
   return (
@@ -214,7 +229,7 @@ const CreateAccount = () => {
                 />
                 <FormField
                   control={createAccountForm.control}
-                  name="sourceofIncome"
+                  name="sourceOfIncome"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Source of Income</FormLabel>
