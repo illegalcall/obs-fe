@@ -97,6 +97,9 @@ const Netbanking = () => {
     const tempName = "John Doe"
     updateAccountId(tempId + '')
     updateName(tempName)
+    window.sessionStorage.setItem("accountId", tempId+"");
+    window.sessionStorage.setItem("name", tempName);
+
 
 
     //TODO: handle login logic

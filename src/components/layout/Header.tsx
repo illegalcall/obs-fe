@@ -11,10 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useNavigate } from "react-router-dom"
 
 
 
 const Header = () => {
+  const navigate = useNavigate()
   //TODO: use store to see if user is logged in
   const [accountId, name, updateAccountId, updateName] = useStore(
     (state) => [state.accountId, state.name, state.updateAccountId, state.updateName],
@@ -23,13 +25,18 @@ const Header = () => {
   const handleLogout = () => {
     updateAccountId("")
     updateName("")
+    window.sessionStorage.removeItem("accountId");
+    window.sessionStorage.removeItem("name");
+    navigate("/signin")
+
   }
 
   return (
     <div className="flex justify-between p-4 px-7 border-b-2 mb-8">
       <span className="text-5xl font-extrabold">OBS</span>
       <DropdownMenu >
-        <DropdownMenuTrigger>{accountId && <Avatar>
+    ;
+        <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId"))  && <Avatar>
           {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
           <AvatarFallback>{name.split(" ").map((n) => n.charAt(0)).join("")}</AvatarFallback>
         </Avatar>}</DropdownMenuTrigger>
