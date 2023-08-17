@@ -80,6 +80,7 @@ const Netbanking = () => {
     console.log(values)
 
     const data = await apiService.login(values)
+    if(data ==="Failed") {return}
     const accountId = data.split(",")[0]
     const name = data.split(",")[1].split(" ").slice(1).join(" ")
     updateAccountId(accountId)

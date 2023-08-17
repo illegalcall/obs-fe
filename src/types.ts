@@ -16,12 +16,12 @@ export const createAccountFormSchema = z.object({
 })
 
 export const loginFormSchema = z.object({
-  userId: z.string().min(10).max(15),
+  userId: z.string().min(5).max(15),
   password: z.string().min(8)
 })
 
 export const registerFormSchema = z.object({
-  accountNumber: z.string().min(10).max(15),
+  accountNumber: z.string().min(5).max(15),
   password: z.string().min(8),
   confirmPassword: z.string().min(8),
   transactionPassword: z.string().min(5),
