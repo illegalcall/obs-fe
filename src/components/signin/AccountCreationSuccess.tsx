@@ -2,32 +2,26 @@ import Copy from "@/icons/Copy"
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from "@/components/ui/use-toast"
-import { useStore } from "@/store"
+
 
 
 const AccountCreationSuccess = () => {
   const navigate = useNavigate()
-  const { accountId } = useParams()
+  const { accountId: info } = useParams()
   const { toast } = useToast()
 
+  const accountId = info?.split('&')[0]
+  const name = info?.split('&')[1]
   const handleCopy = () => {
     navigator.clipboard.writeText(accountId || '')
     toast({
       title: "Account id copied to clipboard",
     })
-
   }
-
-  const [name] = useStore(
-    (state) => [state.name],
-  )
-
-  // const title = "Mr", firstName = "John", lastName = "Doe"
 
   return (
     <div className="text-center">
       <h2 className="pb-2 text-3xl font-semibold text-center">
-        {/* Congratulations, {title} {firstName} {lastName} 🎉 */}
         Congratulations, {name} 🎉
 
       </h2>

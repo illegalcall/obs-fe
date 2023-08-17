@@ -33,29 +33,14 @@ import {
 } from "@/components/ui/form"
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from "@/store"
+import { APIService } from "@/service"
+import { loginFormSchema, registerFormSchema } from "@/types"
 
 
-const loginFormSchema = z.object({
-  userId: z.string().min(11).max(15),
-  password: z.string().min(8)
-})
 
-const registerFormSchema = z.object({
-  accountNumber: z.string().min(11).max(15),
-  password: z.string().min(8),
-  confirmPassword: z.string().min(8),
-  transactionPassword: z.string().min(5),
-  confirmTransactionPassword: z.string().min(5),
-  otp: z.string().min(6).max(6)
-}).refine(data => data.transactionPassword === data.confirmTransactionPassword, {
-  message: "Transaction Passwords do not match",
-  path: ["confirmTransactionPassword"],
-}).refine(data => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-})
 
 const Netbanking = () => {
+  const apiService = new APIService()
   const [activeTab, setActiveTab] = React.useState("login")
   const navigate = useNavigate()
 
@@ -91,28 +76,26 @@ const Netbanking = () => {
   })
 
 
-  function onLogin(values: z.infer<typeof loginFormSchema>) {
+  async function onLogin(values: z.infer<typeof loginFormSchema>) {
     console.log(values)
-    const tempId = Math.floor(Math.random() * 100000000000)
-    const tempName = "John Doe"
-    updateAccountId(tempId + '')
-    updateName(tempName)
-    window.sessionStorage.setItem("accountId", tempId+"");
-    window.sessionStorage.setItem("name", tempName);
 
+    const data = await apiService.login(values)
+    const accountId = data.split(",")[0]
+    const name = data.split(",")[1].split(" ").slice(1).join(" ")
+    updateAccountId(accountId)
+    updateName(name)
+    window.sessionStorage.setItem("accountId", accountId)
+    window.sessionStorage.setItem("name", name)
 
-
-    //TODO: handle login logic
     navigate('/dashboard')
-
-
   }
 
-  function onRegister(values: z.infer<typeof registerFormSchema>) {
+  const onRegister = async (values: z.infer<typeof registerFormSchema>) => {
     console.log(values)
-    const tempNetbankingId = Math.floor(Math.random() * 100000000000)
+    const data = await apiService.register(values)
+    const netBankingId = data
 
-    navigate(`/account-registration-success/${tempNetbankingId}`)
+    navigate(`/account-registration-success/${netBankingId}`)
     // setActiveTab("login")
   }
 

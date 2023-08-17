@@ -2,6 +2,7 @@ import Copy from "@/icons/Copy"
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from "@/components/ui/use-toast"
+import { useStore } from "@/store"
 
 
 const AccountRegistrationSuccess = () => {
@@ -14,15 +15,13 @@ const AccountRegistrationSuccess = () => {
     toast({
       title: "Netbanking id copied to clipboard",
     })
-
   }
 
-  const title = "Mr", firstName = "John", lastName = "Doe"
 
   return (
     <div className="text-center">
       <h2 className="pb-2 text-3xl font-semibold text-center">
-        Congratulations, {title} {firstName} {lastName} 🎉
+        Congratulations 🎉
       </h2>
       <p> Your account has been registered successfully for Netbanking. You will be able to use it after admin approval.</p>
       <p> Your netbanking id is: <b>{netbankingId}</b> <Copy onClick={handleCopy} className="h-[30px] inline cursor-pointer" /> </p>

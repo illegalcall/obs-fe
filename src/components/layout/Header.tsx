@@ -25,18 +25,16 @@ const Header = () => {
   const handleLogout = () => {
     updateAccountId("")
     updateName("")
-    window.sessionStorage.removeItem("accountId");
-    window.sessionStorage.removeItem("name");
+    window.sessionStorage.removeItem("accountId")
+    window.sessionStorage.removeItem("name")
     navigate("/signin")
-
   }
 
   return (
     <div className="flex justify-between p-4 px-7 border-b-2 mb-8">
-      <span className="text-5xl font-extrabold">OBS</span>
+      <span className="text-5xl font-extrabold cursor-pointer" onClick={() => navigate('/dashboard')}>OBS</span>
       <DropdownMenu >
-    ;
-        <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId"))  && <Avatar>
+        <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId")) && <Avatar>
           {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
           <AvatarFallback>{name.split(" ").map((n) => n.charAt(0)).join("")}</AvatarFallback>
         </Avatar>}</DropdownMenuTrigger>
@@ -45,7 +43,6 @@ const Header = () => {
           <DropdownMenuSeparator />
           <DropdownMenuLabel>{accountId}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-
           <DropdownMenuItem className="cursor-pointer text-red-500" onClick={handleLogout}>Log out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

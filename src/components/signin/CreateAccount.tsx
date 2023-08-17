@@ -23,25 +23,14 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { useStore } from '@/store'
+import { createAccountFormSchema } from "@/types"
+import { APIService } from "@/service"
 
-const createAccountFormSchema = z.object({
-  title: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  fatherName: z.string(),
-  mobileNo: z.string(),
-  emailId: z.string().email(),
-  aadharNo: z.string().length(12),
-  dOB: z.string(),
-  address: z.string(),
-  occupationType: z.string(),
-  sourceOfIncome: z.string(),
-  grossAnnualIncome: z.string(),
-})
+
 
 const CreateAccount = () => {
+  const apiService = new APIService()
   const navigate = useNavigate()
   const createAccountForm = useForm<z.infer<typeof createAccountFormSchema>>({
     resolver: zodResolver(createAccountFormSchema),
@@ -67,18 +56,10 @@ const CreateAccount = () => {
 
 
   async function onCreateAccount(values: z.infer<typeof createAccountFormSchema>) {
-    console.log("Hello", values)
-    // const tempAccountId = Math.floor(Math.random() * 100000000000)
-    
-    const resp = await axios.post("http://localhost:8080/user/register",values)
-    const data = resp.data;
-    const accId = data.split(",")[0];
-    const name = data.split(",")[1];
-    updateAccountId(accId + '')
-    updateName(name)
-    window.sessionStorage.setItem("accountId", accId+"");
-    window.sessionStorage.setItem("name", name);
-    navigate(`/account-creation-success/${accId}`)
+    const data = await apiService.createAccount(values)
+    const accountId = data.split(",")[0]
+    const name = data.split(",")[1]
+    navigate(`/account-creation-success/${accountId}&${name}`)
   }
 
   return (
