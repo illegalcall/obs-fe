@@ -17,7 +17,7 @@ export class APIService {
 
   async register(values: z.infer<typeof registerFormSchema>) {
     try {
-      const response = await axios.post('http://localhost:8080/netbanking/register', values)
+      const response = await axios.post('http://localhost:8080/netbanking/signup', values)
       return response.data
     } catch (err) {
       console.log(err);
@@ -37,7 +37,7 @@ export class APIService {
 
   async getAccountDetails(accountId: string) {
     try {
-      const response = await axios.get(`http://localhost:8080/netbanking/account/${accountId}`)
+      const response = await axios.get(`http://localhost:8080/accountdetails/${accountId}`)
       return response.data
     } catch (err) {
       console.log(err);
