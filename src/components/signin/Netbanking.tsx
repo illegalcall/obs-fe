@@ -34,7 +34,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from "@/store"
 import { APIService } from "@/service"
-import { loginFormSchema, registerFormSchema } from "@/types"
+import { LoginResponse, RegisterResponse, loginFormSchema, registerFormSchema } from "@/types"
 import { useToast } from "../ui/use-toast"
 
 
@@ -79,7 +79,7 @@ const Netbanking = () => {
     const data = await apiService.login(values)
     console.log("🚀 ~ file: Netbanking.tsx:83 ~ onLogin ~ data:", data)
 
-    if (data.message !== 'Login Successful') {
+    if (data.message !== LoginResponse.SUCCESS) {
       toast({
         title: "Login Failed",
         description: data.message,
@@ -110,7 +110,7 @@ const Netbanking = () => {
   const onRegister = async (values: z.infer<typeof registerFormSchema>) => {
     const data = await apiService.register(values)
 
-    if (data.message !== 'Netbanking Registration Successful!') {
+    if (data.message !== RegisterResponse.SUCCESS) {
       toast({
         title: "Registration Failed",
         description: data.message,

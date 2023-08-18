@@ -34,3 +34,13 @@ export const registerFormSchema = z.object({
   message: "Passwords do not match",
   path: ["confirmPassword"],
 })
+
+export enum LoginResponse {
+  SUCCESS = "Login Successful",
+  FAILURE = "FAILURE",
+}
+
+export enum RegisterResponse {
+  SUCCESS = "Netbanking Registration Successful!",
+  FAILURE = "FAILURE",
+}
