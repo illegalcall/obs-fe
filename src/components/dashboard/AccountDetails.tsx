@@ -22,9 +22,10 @@ const AccountDetails = () => {
     name: "", activeSince: "", balance: 0
   })
   useEffect(() => {
+    if (accountId === "") return
     apiService.getAccountDetails(accountId).then((res) => {
-      const { name, createdAt, balance } = res
-      setAccountDetails({ name, activeSince: createdAt, balance })
+      const { fullName, createdAt, balance } = res
+      setAccountDetails({ name: fullName, activeSince: createdAt, balance })
       setLoading(false)
     })
   }, [accountId])

@@ -49,7 +49,7 @@ export class APIService {
 
   async getAccountDetails(accountId: string) {
     try {
-      const response = await axios.get(`http://localhost:8080/accountdetails/${accountId}`)
+      const response = await axios.get(`http://localhost:8080/netbanking/account/${accountId}`)
       return response.data
     } catch (err) {
       console.log(err);
