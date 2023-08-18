@@ -57,8 +57,8 @@ const CreateAccount = () => {
 
   async function onCreateAccount(values: z.infer<typeof createAccountFormSchema>) {
     const data = await apiService.createAccount(values)
-    const accountId = data.split(",")[0]
-    const name = data.split(",")[1]
+    const accountId = data.accountId
+    const name = data.fullName
     navigate(`/account-creation-success/${accountId}&${name}`)
   }
 
