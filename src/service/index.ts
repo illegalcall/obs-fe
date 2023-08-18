@@ -17,7 +17,18 @@ export class APIService {
 
   async register(values: z.infer<typeof registerFormSchema>) {
     try {
-      const response = await axios.post('http://localhost:8080/netbanking/signup', values)
+      const reqData:any = {
+        accountId: values.accountNumber,
+        txnPassword: values.transactionPassword,
+        password: values.password,
+        otp: values.otp
+      }
+      
+
+      const response = await axios.post('http://localhost:8080/netbanking/signup', reqData)
+      // const response = await axios.post('http://localhost:8080/netbanking/signup', values)
+      
+      console.log('r',response)
       return response.data
     } catch (err) {
       console.log(err);
@@ -27,6 +38,7 @@ export class APIService {
 
   async login(values: z.infer<typeof loginFormSchema>) {
     try {
+
       const response = await axios.post('http://localhost:8080/netbanking/login', values)
       return response.data
     } catch (err) {
