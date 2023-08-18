@@ -35,11 +35,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from "@/store"
 import { APIService } from "@/service"
 import { loginFormSchema, registerFormSchema } from "@/types"
-
-
+import { useToast } from "../ui/use-toast"
 
 
 const Netbanking = () => {
+  const { toast } = useToast()
   const apiService = new APIService()
   const [activeTab, setActiveTab] = React.useState("login")
   const navigate = useNavigate()
@@ -80,8 +80,29 @@ const Netbanking = () => {
     console.log(values)
 
     const data = await apiService.login(values)
-    const accountId = data.split(",")[0]
-    const name = data.split(",")[1].split(" ").slice(1).join(" ")
+    console.log("🚀 ~ file: Netbanking.tsx:83 ~ onLogin ~ data:", data)
+
+
+    if (data.message !== 'Login Successful') {
+      toast({
+        title: "Login Failed",
+        description: data.message,
+      })
+      loginForm.setError("userId", {
+        type: "manual",
+        message: data.message,
+      })
+      loginForm.setError("password", {
+        type: "manual",
+        message: data.message,
+      })
+      return
+    }
+
+    const accountId = data.netbankingId
+    const name = data.fullName
+
+
     updateAccountId(accountId)
     updateName(name)
     window.sessionStorage.setItem("accountId", accountId)
