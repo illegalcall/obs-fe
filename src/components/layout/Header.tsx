@@ -30,13 +30,17 @@ const Header = () => {
     navigate("/signin")
   }
 
+  const getName = () => {
+    return name.split(" ").slice(1).map((n) => n.charAt(0)).join("")
+  }
+
   return (
     <div className="flex justify-between p-4 px-7 border-b-2 mb-8">
       <span className="text-5xl font-extrabold cursor-pointer" onClick={() => navigate('/dashboard')}>OBS</span>
       <DropdownMenu >
         <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId")) && <Avatar>
           {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-          <AvatarFallback>{name.split(" ").map((n) => n.charAt(0)).join("")}</AvatarFallback>
+          <AvatarFallback>{getName()}</AvatarFallback>
         </Avatar>}</DropdownMenuTrigger>
         <DropdownMenuContent >
           <DropdownMenuLabel>{name}</DropdownMenuLabel>

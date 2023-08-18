@@ -3,6 +3,7 @@ import DashboardLayout from "./DashboardLayout"
 import withAuth from "../withAuth"
 import { APIService } from "@/service"
 import { useStore } from "@/store"
+import AccountStatement from "./AccountStatement"
 
 const Item = ({
   property, value
@@ -40,6 +41,7 @@ const AccountDetails = () => {
         <Item property={'Active Since'} value={activeSince} />
         <Item property={'Balance'} value={balance + ""} />
       </div>
+      <AccountStatement />
     </DashboardLayout>
   )
 }
