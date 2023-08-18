@@ -50,7 +50,6 @@ const Netbanking = () => {
 
   useEffect(() => {
     if (accountId !== "") {
-      console.log("hii")
       navigate('/dashboard')
     }
   })
@@ -77,11 +76,8 @@ const Netbanking = () => {
 
 
   async function onLogin(values: z.infer<typeof loginFormSchema>) {
-    console.log(values)
-
     const data = await apiService.login(values)
     console.log("🚀 ~ file: Netbanking.tsx:83 ~ onLogin ~ data:", data)
-
 
     if (data.message !== 'Login Successful') {
       toast({
@@ -112,12 +108,23 @@ const Netbanking = () => {
   }
 
   const onRegister = async (values: z.infer<typeof registerFormSchema>) => {
-    console.log(values)
     const data = await apiService.register(values)
-    const netBankingId = data
+
+    if (data.message !== 'Netbanking Registration Successful!') {
+      toast({
+        title: "Registration Failed",
+        description: data.message,
+      })
+      registerForm.setError("accountNumber", {
+        type: "manual",
+        message: data.message,
+      })
+      return
+    }
+
+    const netBankingId = data.netbankingId
 
     navigate(`/account-registration-success/${netBankingId}`)
-    // setActiveTab("login")
   }
 
   return (
