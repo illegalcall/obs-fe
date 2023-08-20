@@ -44,3 +44,9 @@ export enum RegisterResponse {
   SUCCESS = "Netbanking Registration Successful!",
   FAILURE = "FAILURE",
 }
+
+export enum TransferType {
+  IMPS= "IMPS",
+  NEFT= "NEFT",
+  RTGS= "RTGS",
+}
