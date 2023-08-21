@@ -55,10 +55,8 @@ const TransferForm = ({ type }: { type: TransferType }) => {
   function onSubmit(values: z.infer<typeof fundsTransferFormSchema>) {
     console.log(values)
     toast({
-      title: "Funds transfer request submitted",
+      title: "Funds transfer request submitted 💰",
     })
-    // clear form data
-    // after submit
     fundsTransferForm.reset()
   }
 

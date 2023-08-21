@@ -10,6 +10,8 @@ import Dashboard from "./components/dashboard"
 import Welcome from "./components/Welcome"
 import AccountDetails from "./components/dashboard/AccountDetails"
 import FundTransfer from "./components/dashboard/FundTransfer"
+import ListAccounts from "./components/admin/ListAccounts"
+
 function App() {
   return (
     <Router>
@@ -23,6 +25,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/account-details" element={<AccountDetails />} />
           <Route path="/fund-transfer" element={<FundTransfer />} />
+          <Route path="/admin/accounts" element={<ListAccounts />} />
         </Routes>
         <Toaster />
       </Layout>
