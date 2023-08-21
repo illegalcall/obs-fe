@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DashboardLayout from "./DashboardLayout"
 import withAuth from "../withAuth"
 
@@ -18,50 +18,110 @@ import {
 import { Input } from "@/components/ui/input"
 import { useForm } from 'react-hook-form'
 import { TransferType } from "@/types"
+import { useToast } from "../ui/use-toast"
 
 const fundsTransferFormSchema = z.object({
-  type: z.string().min(2, {
+  transactionType: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
+  fromUserId: z.string().min(5, {
+    message: "Account number must be at least 5 characters.",
+  }),
+  toUserId: z.string().min(5, {
+    message: "Account number must be at least 5 characters.",
+  }),
+  amount: z.coerce.number().positive(),
+  remarks: z.string().optional(),
 })
 
 const TransferForm = ({ type }: { type: TransferType }) => {
   const fundsTransferForm = useForm<z.infer<typeof fundsTransferFormSchema>>({
     resolver: zodResolver(fundsTransferFormSchema),
     defaultValues: {
-      type: "",
+      transactionType: "",
+      fromUserId: "",
+      toUserId: "",
+      amount: 0,
+      remarks: "",
     },
   })
+  const { toast } = useToast()
+
+  useEffect(() => {
+    fundsTransferForm.setValue("transactionType", type)
+    fundsTransferForm.setValue("fromUserId", 'qweqqweqwewqs')
+  }, [type])
 
   function onSubmit(values: z.infer<typeof fundsTransferFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values)
+    toast({
+      title: "Funds transfer request submitted",
+    })
+    // clear form data
+    // after submit
+    fundsTransferForm.reset()
   }
 
   return (
+    <div className="mt-10">
+      <h2 className="text-xl font-semibold">
+        {type}
+      </h2>
+      <Form {...fundsTransferForm}>
+        <form onSubmit={fundsTransferForm.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={fundsTransferForm.control}
+            name="toUserId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>To Account Id</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is the account id of the receiver.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={fundsTransferForm.control}
+            name="amount"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Amount</FormLabel>
+                <FormControl>
+                  <Input type="number" placeholder="" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is your amount to be transferred.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={fundsTransferForm.control}
+            name="remarks"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Remarks</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Remarks for the transaction.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-    <Form {...fundsTransferForm}>
-      <form onSubmit={fundsTransferForm.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={fundsTransferForm.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </div>
   )
 }
 
