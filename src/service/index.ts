@@ -51,7 +51,7 @@ export class APIService {
     try {
       const response = await axios.get(`http://localhost:8080/account/getdetails`,{
         params:{
-          accountId
+          netbankingId:accountId
         }
       })
       return response.data
