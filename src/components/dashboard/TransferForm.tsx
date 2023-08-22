@@ -29,7 +29,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
   const fundsTransferForm = useForm<z.infer<typeof fundsTransferFormSchema>>({
     resolver: zodResolver(fundsTransferFormSchema),
     defaultValues: {
-      transactionType: "",
+      txnType: "",
       fromUserId: "",
       toUserId: "",
       amount: 0,
@@ -40,7 +40,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
   const [accountId] = useStore((state)=> [state.accountId])
 
   useEffect(() => {
-    fundsTransferForm.setValue("transactionType", type)
+    fundsTransferForm.setValue("txnType", type)
     fundsTransferForm.setValue("fromUserId", accountId)
   }, [type])
 

@@ -16,7 +16,7 @@ interface ITxn {
   transactionId: string
   toUserId: string
   fromUserId: string
-  transactionType: string
+  txnType: string
   amount: string
   completedAt: string
   remarks?: string
@@ -28,7 +28,7 @@ const transactions: ITxn[] = [
     transactionId: "123456789",
     toUserId: "123456789",
     fromUserId: "123456789",
-    transactionType: "IMPS",
+    txnType: "IMPS",
     amount: "1000",
     completedAt: "2021-09-01",
     remarks: "Salary",
@@ -39,7 +39,7 @@ const transactions: ITxn[] = [
     transactionId: "123456789",
     toUserId: "123456789",
     fromUserId: "123456789",
-    transactionType: "IMPS",
+    txnType: "IMPS",
     amount: "1000",
     completedAt: "2021-09-01",
     remarks: "Salary",
@@ -49,7 +49,7 @@ const transactions: ITxn[] = [
     transactionId: "123456789",
     toUserId: "123456789",
     fromUserId: "123456789",
-    transactionType: "IMPS",
+    txnType: "IMPS",
     amount: "1000",
     completedAt: "2021-09-01",
     remarks: "Salary",
@@ -59,7 +59,7 @@ const transactions: ITxn[] = [
     transactionId: "123456789",
     toUserId: "123456789",
     fromUserId: "123456789",
-    transactionType: "IMPS",
+    txnType: "IMPS",
     amount: "1000",
     completedAt: "2021-09-01",
     remarks: "Salary",
@@ -100,7 +100,7 @@ const Transactions = () => {
               <TableCell>{txn.transactionId}</TableCell>
               <TableCell>{txn.toUserId}</TableCell>
               <TableCell>{txn.fromUserId}</TableCell>
-              <TableCell>{txn.transactionType}</TableCell>
+              <TableCell>{txn.txnType}</TableCell>
               <TableCell>{txn.completedAt}</TableCell>
               <TableCell className={`font-semibold text-right ${txn.credit ? 'text-red-400' : 'text-green-500'}`}>{txn.amount}</TableCell>
             </TableRow>
