@@ -49,7 +49,11 @@ export class APIService {
 
   async getAccountDetails(accountId: string) {
     try {
-      const response = await axios.get(`http://localhost:8080/account/getdetails/${accountId}`)
+      const response = await axios.get(`http://localhost:8080/account/getdetails`,{
+        params:{
+          accountId
+        }
+      })
       return response.data
     } catch (err) {
       console.log(err);
