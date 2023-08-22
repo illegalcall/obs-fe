@@ -63,7 +63,7 @@ export class APIService {
   // get transactions for account
   async getTransactions(accountId: string) {
     try {
-      const response = await axios.get(`http://localhost:8080/transactions`,{
+      const response = await axios.get(`http://localhost:8080/transactions/user`,{
         params:{
           netbankingId:accountId
         }
