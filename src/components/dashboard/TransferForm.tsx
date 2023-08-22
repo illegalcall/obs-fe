@@ -20,6 +20,7 @@ import { useForm } from 'react-hook-form'
 import { TransferType, fundsTransferFormSchema } from "@/types"
 import { useToast } from "../ui/use-toast"
 import { APIService } from '@/service'
+import { useStore } from '@/store'
 
 
 
@@ -36,10 +37,11 @@ const TransferForm = ({ type }: { type: TransferType }) => {
     },
   })
   const { toast } = useToast()
+  const [accountId] = useStore((state)=> [state.accountId])
 
   useEffect(() => {
     fundsTransferForm.setValue("transactionType", type)
-    fundsTransferForm.setValue("fromUserId", 'qweqqweqwewqs')
+    fundsTransferForm.setValue("fromUserId", accountId)
   }, [type])
 
   async function onSubmit(values: z.infer<typeof fundsTransferFormSchema>) {
