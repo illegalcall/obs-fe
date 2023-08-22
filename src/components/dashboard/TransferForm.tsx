@@ -17,24 +17,14 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useForm } from 'react-hook-form'
-import { TransferType } from "@/types"
+import { TransferType, fundsTransferFormSchema } from "@/types"
 import { useToast } from "../ui/use-toast"
+import { APIService } from '@/service'
 
-const fundsTransferFormSchema = z.object({
-  transactionType: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  fromUserId: z.string().min(5, {
-    message: "Account number must be at least 5 characters.",
-  }),
-  toUserId: z.string().min(5, {
-    message: "Account number must be at least 5 characters.",
-  }),
-  amount: z.coerce.number().positive(),
-  remarks: z.string().optional(),
-})
+
 
 const TransferForm = ({ type }: { type: TransferType }) => {
+  const apiService = new APIService()
   const fundsTransferForm = useForm<z.infer<typeof fundsTransferFormSchema>>({
     resolver: zodResolver(fundsTransferFormSchema),
     defaultValues: {
@@ -52,8 +42,10 @@ const TransferForm = ({ type }: { type: TransferType }) => {
     fundsTransferForm.setValue("fromUserId", 'qweqqweqwewqs')
   }, [type])
 
-  function onSubmit(values: z.infer<typeof fundsTransferFormSchema>) {
+  async function onSubmit(values: z.infer<typeof fundsTransferFormSchema>) {
     console.log(values)
+    const res = await apiService.transfer(values)
+    console.log('res',res)
     toast({
       title: "Funds transfer request submitted 💰",
     })

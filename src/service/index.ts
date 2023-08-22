@@ -1,4 +1,4 @@
-import { createAccountFormSchema, loginFormSchema, registerFormSchema } from "@/types";
+import { createAccountFormSchema, fundsTransferFormSchema, loginFormSchema, registerFormSchema } from "@/types";
 import axios from "axios"
 import { z } from "zod"
 
@@ -63,7 +63,11 @@ export class APIService {
   // get transactions for account
   async getTransactions(accountId: string) {
     try {
-      const response = await axios.get(`http://localhost:8080/account/transactions/${accountId}`)
+      const response = await axios.get(`http://localhost:8080/transactions`,{
+        params:{
+          netbankingId:accountId
+        }
+      })
       return response.data
     } catch (err) {
       console.log(err);
@@ -72,14 +76,9 @@ export class APIService {
   }
 
 
-  async transfer(from: string, to: string, amount: number, type: string) {
+  async transfer(values: z.infer<typeof fundsTransferFormSchema>) {
     try {
-      const response = await axios.post(`http://localhost:8080/account/transfer`, {
-        from,
-        to,
-        amount,
-        type
-      })
+      const response = await axios.post(`http://localhost:8080/transactions/transfer`, values)
       return response.data
     } catch (err) {
       console.log(err);

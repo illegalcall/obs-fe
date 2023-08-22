@@ -50,3 +50,17 @@ export enum TransferType {
   NEFT= "NEFT",
   RTGS= "RTGS",
 }
+
+export const fundsTransferFormSchema = z.object({
+  transactionType: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  fromUserId: z.string().min(5, {
+    message: "Account number must be at least 5 characters.",
+  }),
+  toUserId: z.string().min(5, {
+    message: "Account number must be at least 5 characters.",
+  }),
+  amount: z.coerce.number().positive(),
+  remarks: z.string().optional(),
+})
