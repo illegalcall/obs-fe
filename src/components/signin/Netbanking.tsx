@@ -57,7 +57,7 @@ const Netbanking = () => {
   const loginForm = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      userId: "",
+      netbankingId: "",
       password: "",
     },
   })
@@ -84,7 +84,7 @@ const Netbanking = () => {
         title: "Login Failed",
         description: data.message,
       })
-      loginForm.setError("userId", {
+      loginForm.setError("netbankingId", {
         type: "manual",
         message: data.message,
       })
@@ -147,7 +147,7 @@ const Netbanking = () => {
                 <form onSubmit={loginForm.handleSubmit(onLogin)} className="space-y-8">
                   <FormField
                     control={loginForm.control}
-                    name="userId"
+                    name="netbankingId"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>User id</FormLabel>
