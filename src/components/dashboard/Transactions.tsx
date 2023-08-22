@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Table,
   TableBody,
@@ -8,6 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { APIService } from '@/service'
+import { useStore } from '@/store'
+import { set } from 'zod'
 
 interface ITxn {
   transactionId: string
@@ -65,6 +68,17 @@ const transactions: ITxn[] = [
 ]
 
 const Transactions = () => {
+  const apiService = new APIService()
+  const [txnData, setTxnData]=useState()
+  const [accountId] = useStore(
+    (state) => [state.accountId],
+  )
+  useEffect(()=>{
+    apiService.getTransactions(accountId).then((data)=>{
+      console.log('data',data)
+      setTxnData(data)
+    })
+  },[])
   return (
     <div className="mt-4">
       <h1 className="text-2xl font-bold ">Transactions</h1>
