@@ -47,11 +47,21 @@ const TransferForm = ({ type }: { type: TransferType }) => {
   async function onSubmit(values: z.infer<typeof fundsTransferFormSchema>) {
     console.log(values)
     const res = await apiService.transfer(values)
-    console.log('res',res)
-    toast({
-      title: "Funds transfer request submitted 💰",
-    })
-    fundsTransferForm.reset()
+    if(res.message){
+      toast({
+        title: res.message
+      })
+      fundsTransferForm.setError('amount',{
+        message: res.message
+      })
+    }
+    else{
+      console.log('res',res)
+      toast({
+        title: "Funds transfer request submitted 💰",
+      })
+      fundsTransferForm.reset()
+    }
   }
 
   return (
