@@ -64,3 +64,10 @@ export const fundsTransferFormSchema = z.object({
   amount: z.coerce.number().positive(),
   remarks: z.string().optional(),
 })
+
+export const addBeneficiaryFormSchema = z.object({
+  name: z.string().min(1),
+  accountId: z.string().min(5, {
+    message: "Account number must be at least 5 characters.",
+  }),
+})
