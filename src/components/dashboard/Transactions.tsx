@@ -23,64 +23,21 @@ interface ITxn {
   credit?: boolean
 }
 
-const transactions: ITxn[] = [
-  {
-    transactionId: "123456789",
-    toUserId: "123456789",
-    fromUserId: "123456789",
-    txnType: "IMPS",
-    amount: "1000",
-    completedAt: "2021-09-01",
-    remarks: "Salary",
-    credit: true,
-  },
-  // make 4 more of these
-  {
-    transactionId: "123456789",
-    toUserId: "123456789",
-    fromUserId: "123456789",
-    txnType: "IMPS",
-    amount: "1000",
-    completedAt: "2021-09-01",
-    remarks: "Salary",
-    credit: false,
-  },
-  {
-    transactionId: "123456789",
-    toUserId: "123456789",
-    fromUserId: "123456789",
-    txnType: "IMPS",
-    amount: "1000",
-    completedAt: "2021-09-01",
-    remarks: "Salary",
-    credit: true,
-  },
-  {
-    transactionId: "123456789",
-    toUserId: "123456789",
-    fromUserId: "123456789",
-    txnType: "IMPS",
-    amount: "1000",
-    completedAt: "2021-09-01",
-    remarks: "Salary",
-    credit: false,
-  }
-]
 
 const Transactions = () => {
   const apiService = new APIService()
-  const [txnData, setTxnData]=useState<ITxn[]>([])
+  const [txnData, setTxnData] = useState<ITxn[]>([])
   const [accountId] = useStore(
     (state) => [state.accountId],
   )
-  useEffect(()=>{
-    apiService.getTransactions(accountId).then((data)=>{
-      console.log('data',data)
+  useEffect(() => {
+    apiService.getTransactions(accountId).then((data) => {
+      console.log('data', data)
       setTxnData(data)
     })
-  },[])
+  }, [])
 
-  if(!txnData.length){
+  if (!txnData.length) {
     return (
       <div className="mt-4">
         <h1 className="text-2xl font-bold ">Transactions</h1>
@@ -88,7 +45,7 @@ const Transactions = () => {
       </div>
     )
   }
-  
+
   return (
     <div className="mt-4">
       <h1 className="text-2xl font-bold ">Transactions</h1>
@@ -116,7 +73,7 @@ const Transactions = () => {
                 <TableCell className={`font-semibold text-right ${txn.credit ? 'text-red-400' : 'text-green-500'}`}>{txn.amount}</TableCell>
               </TableRow>
             ))
-            }
+          }
         </TableBody>
       </Table>
     </div>

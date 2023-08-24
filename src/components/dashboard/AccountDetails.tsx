@@ -19,25 +19,25 @@ const AccountDetails = () => {
   const [loading, setLoading] = useState(true)
 
   const [accountDetails, setAccountDetails] = useState({
-    name: "", activeSince: "", balance: 0
+    name: "", activeSince: "", balance: 0, accountNumber: ""
   })
   useEffect(() => {
     if (accountId === "") return
     apiService.getAccountDetails(accountId).then((res) => {
-      const { fullName, createdAt, balance } = res
-      setAccountDetails({ name: fullName, activeSince: createdAt, balance })
+      const { fullName, createdAt, balance, accountNumber } = res
+      setAccountDetails({ name: fullName, activeSince: createdAt, balance, accountNumber })
       setLoading(false)
     })
   }, [accountId])
 
-  const { name, activeSince, balance } = accountDetails
+  const { name, activeSince, balance, accountNumber } = accountDetails
 
   if (loading) return <div>Loading...</div>
 
   return (
     <DashboardLayout>
       <div className='flex flex-col gap-2'>
-        <Item property={'Account No'} value={accountId} />
+        <Item property={'Account No'} value={accountNumber} />
         <Item property={'Name'} value={name} />
         <Item property={'Active Since'} value={activeSince} />
         <Item property={'Balance'} value={balance + ""} />

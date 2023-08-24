@@ -11,6 +11,7 @@ import Welcome from "./components/Welcome"
 import AccountDetails from "./components/dashboard/AccountDetails"
 import FundTransfer from "./components/dashboard/FundTransfer"
 import ListAccounts from "./components/admin/ListAccounts"
+import Profile from "./components/layout/Profile"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/account-details" element={<AccountDetails />} />
           <Route path="/fund-transfer" element={<FundTransfer />} />
           <Route path="/admin/accounts" element={<ListAccounts />} />
+          <Route path="/profile/:netbankingId" element={<Profile />} />
         </Routes>
         <Toaster />
       </Layout>

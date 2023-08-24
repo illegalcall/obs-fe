@@ -30,6 +30,10 @@ const Header = () => {
     navigate("/signin")
   }
 
+  const handleProfileNavigation = () => {
+    navigate(`/profile/${accountId}`)
+  }
+
   const getName = () => {
     return name.split(" ").slice(1).map((n) => n.charAt(0)).join("")
   }
@@ -46,6 +50,8 @@ const Header = () => {
           <DropdownMenuLabel>{name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel>{accountId}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="cursor-pointer" onClick={handleProfileNavigation}>Profile</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer text-red-500" onClick={handleLogout}>Log out</DropdownMenuItem>
         </DropdownMenuContent>
