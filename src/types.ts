@@ -71,3 +71,20 @@ export const addBeneficiaryFormSchema = z.object({
     message: "Account number must be at least 5 characters.",
   }),
 })
+
+export const resetPasswordSchema = z.object({
+  password: z.string().min(8),
+  confirmPassword: z.string().min(8),
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+})
+
+export const resetTxnPasswordSchema = z.object({
+  transactionPassword: z.string().min(5),
+  confirmTransactionPassword: z.string().min(5),
+})
+.refine(data => data.transactionPassword === data.confirmTransactionPassword, {
+  message: "Transaction Passwords do not match",
+  path: ["confirmTransactionPassword"],
+})

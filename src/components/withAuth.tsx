@@ -12,15 +12,15 @@ const withAuth = (WrappedComponent: React.FunctionComponent) => {
 
     // If no accountId was found, redirect to login page.
     useEffect(() => {
-      if (!accountId && !window.sessionStorage.getItem("accountId")) {
-        navigate('/signin')
-      }
-      else {
+      // if (!accountId && !window.sessionStorage.getItem("accountId")) {
+      //   navigate('/signin')
+      // }
+      // else {
  
-          updateAccountId(window.sessionStorage.getItem("accountId")||"")
-          updateName(window.sessionStorage.getItem("name")||"")
+      //     updateAccountId(window.sessionStorage.getItem("accountId")||"")
+      //     updateName(window.sessionStorage.getItem("name")||"")
     
-      }
+      // }
     }, [])
 
     return <WrappedComponent {...props} />
