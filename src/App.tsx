@@ -14,6 +14,7 @@ import ListAccounts from "./components/admin/ListAccounts"
 import Profile from "./components/layout/Profile"
 import TransactionForAccount from "./components/admin/TransactionForAccount"
 import Withdrawal from "./components/dashboard/withdrawal"
+import AdminLayout from "./components/admin/AdminLayout"
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
           <Route path="/fund-transfer" element={<FundTransfer />} />
           <Route path="/admin/accounts" element={<ListAccounts />} />
           <Route path="/profile/:netbankingId" element={<Profile />} />
-          <Route path="/admin/:accountId/transactions" element={<TransactionForAccount />} />
+          <Route path="/admin/:accountId/transactions" element={<AdminLayout><TransactionForAccount /></AdminLayout>} />
         </Routes>
         <Toaster />
       </Layout>

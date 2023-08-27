@@ -12,6 +12,7 @@ import { Button } from "../ui/button"
 import { useNavigate } from 'react-router-dom'
 import { DataTable } from './accounts/DataTable'
 import { columns } from './accounts/columns'
+import AdminLayout from "./AdminLayout"
 
 const accounts = [
   {
@@ -45,11 +46,13 @@ const ListAccounts = () => {
   const handleReject = (accountId: string) => {
     console.log(accountId)
   }
-  const handleToTransactions = (accountId: string) =>{
+  const handleToTransactions = (accountId: string) => {
     navigate(`/admin/${accountId}/transactions`)
   }
 
-  return <DataTable columns={columns} data={accounts}/>
+  return <AdminLayout><DataTable columns={columns} data={accounts} /></AdminLayout>
+
+  return <DataTable columns={columns} data={accounts} />
 
   return (
     <div className="w-full">
@@ -72,7 +75,7 @@ const ListAccounts = () => {
               <TableCell>{account.fullName}</TableCell>
               <TableCell>{account.createdAt}</TableCell>
               <TableCell>{account.status}</TableCell>
-              <TableCell className="text-blue-400 cursor-pointer" onClick={()=>handleToTransactions(account.accountId)}>transactions</TableCell>
+              <TableCell className="text-blue-400 cursor-pointer" onClick={() => handleToTransactions(account.accountId)}>transactions</TableCell>
               <TableCell className="flex gap-2 justify-end ">
                 <Button onClick={() => handleApprove(account.accountId)}>Approve</Button>
                 <Button variant={'outline'} onClick={() => handleReject(account.accountId)}>Reject</Button>
