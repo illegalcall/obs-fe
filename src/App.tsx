@@ -13,6 +13,7 @@ import FundTransfer from "./components/dashboard/FundTransfer"
 import ListAccounts from "./components/admin/ListAccounts"
 import Profile from "./components/layout/Profile"
 import TransactionForAccount from "./components/admin/TransactionForAccount"
+import Withdrawal from "./components/dashboard/withdrawal"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/account-creation-success/:accountId" element={<AccountCreationSuccess />} />
           <Route path="/account-registration-success/:netbankingId" element={<AccountRegistrationSuccess />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/withdrawal" element={<Withdrawal />} />
           <Route path="/account-details" element={<AccountDetails />} />
           <Route path="/fund-transfer" element={<FundTransfer />} />
           <Route path="/admin/accounts" element={<ListAccounts />} />

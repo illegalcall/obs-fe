@@ -1,4 +1,4 @@
-import { createAccountFormSchema, fundsTransferFormSchema, loginFormSchema, registerFormSchema } from "@/types";
+import { createAccountFormSchema, fundsTransferFormSchema, loginFormSchema, registerFormSchema, withdrawalFormSchema } from "@/types";
 import axios from "axios"
 import { z } from "zod"
 
@@ -75,10 +75,19 @@ export class APIService {
     }
   }
 
-
   async transfer(values: z.infer<typeof fundsTransferFormSchema>) {
     try {
       const response = await axios.post(`http://localhost:8080/transactions/transfer`, values)
+      return response.data
+    } catch (err) {
+      console.log(err);
+      return { err: 'something went wrong' };
+    }
+  }
+
+  async withdrawal(values: z.infer<typeof withdrawalFormSchema>){
+    try {
+      const response = await axios.post(`http://localhost:8080/withdraw`, values)
       return response.data
     } catch (err) {
       console.log(err);

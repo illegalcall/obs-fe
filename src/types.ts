@@ -100,3 +100,7 @@ export interface ITxn {
   remarks?: string
   credit?: boolean
 }
+
+export const withdrawalFormSchema = z.object({
+  amount: z.coerce.number().positive(),
+})

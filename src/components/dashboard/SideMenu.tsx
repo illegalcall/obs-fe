@@ -20,12 +20,13 @@ const SideMenu = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const checkActive = (route: string) => {
-    return pathname === route
+    return pathname.includes(route)
   }
   return (
     <div className="col-span-1">
       <MenuItem active={checkActive('/account-details')} name={'Account Detail'} onClick={() => navigate('/account-details')} />
       <MenuItem active={checkActive('/fund-transfer')} name={"Fund Transfer"} onClick={() => navigate('/fund-transfer')} />
+      <MenuItem active={checkActive('/withdrawal')} name={"Withdrawal"} onClick={() => navigate('/withdrawal')} />
     </div>
   )
 }
