@@ -11,18 +11,8 @@ import {
 import { APIService } from '@/service'
 import { useStore } from '@/store'
 import { set } from 'zod'
-
-interface ITxn {
-  transactionId: string
-  toUserId: string
-  fromUserId: string
-  txnType: string
-  amount: string
-  completedAt: string
-  remarks?: string
-  credit?: boolean
-}
-
+import TransactionForAccount from "../admin/TransactionForAccount"
+import { ITxn } from "@/types"
 
 const Transactions = () => {
   const apiService = new APIService()
@@ -45,6 +35,9 @@ const Transactions = () => {
       </div>
     )
   }
+
+  return (<TransactionForAccount data={txnData} accId={accountId} />)
+
 
   return (
     <div className="mt-4">

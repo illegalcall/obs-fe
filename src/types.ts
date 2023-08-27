@@ -88,3 +88,15 @@ export const resetTxnPasswordSchema = z.object({
   message: "Transaction Passwords do not match",
   path: ["confirmTransactionPassword"],
 })
+
+
+export interface ITxn {
+  transactionId: string
+  toUserId: string
+  fromUserId: string
+  txnType: string
+  amount: string
+  completedAt: string
+  remarks?: string
+  credit?: boolean
+}

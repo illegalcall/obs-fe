@@ -76,33 +76,33 @@ const Netbanking = () => {
 
 
   async function onLogin(values: z.infer<typeof loginFormSchema>) {
-    // const data = await apiService.login(values)
-    // console.log("🚀 ~ file: Netbanking.tsx:83 ~ onLogin ~ data:", data)
+    const data = await apiService.login(values)
+    console.log("🚀 ~ file: Netbanking.tsx:83 ~ onLogin ~ data:", data)
 
-    // if (data.message !== LoginResponse.SUCCESS) {
-    //   toast({
-    //     title: "Login Failed",
-    //     description: data.message,
-    //   })
-    //   loginForm.setError("netbankingId", {
-    //     type: "manual",
-    //     message: data.message,
-    //   })
-    //   loginForm.setError("password", {
-    //     type: "manual",
-    //     message: data.message,
-    //   })
-    //   return
-    // }
+    if (data.message !== LoginResponse.SUCCESS) {
+      toast({
+        title: "Login Failed",
+        description: data.message,
+      })
+      loginForm.setError("netbankingId", {
+        type: "manual",
+        message: data.message,
+      })
+      loginForm.setError("password", {
+        type: "manual",
+        message: data.message,
+      })
+      return
+    }
 
-    // const accountId = data.netbankingId
-    // const name = data.fullName
+    const accountId = data.netbankingId
+    const name = data.fullName
 
 
-    // updateAccountId(accountId)
-    // updateName(name)
-    // window.sessionStorage.setItem("accountId", accountId)
-    // window.sessionStorage.setItem("name", name)
+    updateAccountId(accountId)
+    updateName(name)
+    window.sessionStorage.setItem("accountId", accountId)
+    window.sessionStorage.setItem("name", name)
 
     navigate('/dashboard')
   }
