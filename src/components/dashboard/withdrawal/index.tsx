@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardLayout from "../DashboardLayout"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form"
 import { Input } from "../../ui/input"
@@ -26,6 +26,10 @@ const Withdrawal = () => {
       netbankingId:accountId
     },
   })
+
+  useEffect(()=>{
+    form.setValue("netbankingId",accountId)
+  },[accountId])
 
   function onSubmit(values: z.infer<typeof withdrawalFormSchema>) {
     toast({
