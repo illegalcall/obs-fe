@@ -1,4 +1,4 @@
-import { createAccountFormSchema, fundsTransferFormSchema, loginFormSchema, registerFormSchema, withdrawalFormSchema } from "@/types";
+import { addBeneficiaryFormSchema, createAccountFormSchema, fundsTransferFormSchema, loginFormSchema, registerFormSchema, withdrawalFormSchema } from "@/types";
 import axios from "axios"
 import { z } from "zod"
 
@@ -124,6 +124,30 @@ export class APIService {
       const response = await axios.get(`http://localhost:8080/transactions/byaccountid`,{
         params:{
           accountId
+        }
+      })
+      return response.data
+    } catch (err) {
+      console.log(err);
+      return { err: 'something went wrong' };
+    }
+  }
+
+  async addBeneficary(values: z.infer<typeof addBeneficiaryFormSchema>){
+    try {
+      const response = await axios.post(`http://localhost:8080/beneficiary/add`,values)
+      return response.data
+    } catch (err) {
+      console.log(err);
+      return { err: 'something went wrong' };
+    }
+  }
+
+  async getBeneficary(netbankingId: string){
+    try {
+      const response = await axios.get(`http://localhost:8080/beneficiary/`,{
+        params:{
+          netbankingId
         }
       })
       return response.data
