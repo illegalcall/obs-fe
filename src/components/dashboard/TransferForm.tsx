@@ -43,16 +43,11 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from '../ui/label'
 
-const dummyBenficiary = [
-  {
-    id: 'qweq12133',
-    name: 'Ram'
-  },
-  {
-    id: 'qweqweqw',
-    name: 'Shyam'
-  }
-]
+interface IBeneficiary {
+  netbankingIdofPayee: string;
+  beneficiaryAccountId: string;
+  beneficiaryName: string;
+}
 
 const TransferForm = ({ type }: { type: TransferType }) => {
   const apiService = new APIService()
@@ -78,11 +73,18 @@ const TransferForm = ({ type }: { type: TransferType }) => {
   const [beneficiaryOpen, setBeneficiaryOpen] = useState(false)
   const { toast } = useToast()
   const [accountId] = useStore((state) => [state.accountId])
+  const [beneficiaries, setBeneficiaries]=useState<IBeneficiary[]>([])
 
   useEffect(() => {
     fundsTransferForm.setValue("txnType", 'dasdsada')
     fundsTransferForm.setValue("fromUserId", 'accountId')
   }, [type])
+
+  useEffect(()=>{
+    if(accountId) apiService.getBeneficary(accountId).then((data)=>{
+      setBeneficiaries(data)
+    })
+  },[accountId])
 
 
   const onBeneficiarySubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -105,6 +107,9 @@ const TransferForm = ({ type }: { type: TransferType }) => {
         title: "🫂 Beneficiary added",
       })
       console.log(values)
+      apiService.addBeneficary(values).then((d)=>{
+        setBeneficiaries(d)
+      })
 
     })(event)
   }
@@ -154,7 +159,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Beneficiares</SelectLabel>
-                        {dummyBenficiary.map((b) => (<SelectItem key={b.id} value={b.id}>{b.name}</SelectItem>))}
+                        {beneficiaries.map((b) => (<SelectItem key={b.beneficiaryAccountId} value={b.beneficiaryAccountId}>{b.beneficiaryName}</SelectItem>))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
