@@ -103,7 +103,9 @@ const Netbanking = () => {
     updateName(name)
     window.sessionStorage.setItem("accountId", accountId)
     window.sessionStorage.setItem("name", name)
+    
     if(data.admin){
+      console.log('data',data)
       window.sessionStorage.setItem('isAdmin',"true")
       navigate('/admin/accounts')
     }
