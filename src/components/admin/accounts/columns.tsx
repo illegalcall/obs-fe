@@ -17,10 +17,8 @@ export type Account = {
   accountId: string
   fullName: string
   createdAt: string
-  status: string
   isApproved: string
 }
-
 
 const Actions = ({ account }: { account: any }) => {
   const navigate = useNavigate()
@@ -68,7 +66,7 @@ export const columns: ColumnDef<Account>[] = [
     header: "Created At",
   },
   {
-    accessorKey: "status",
+    accessorKey: "isApproved",
     header: ({ column }) => {
       return (
         <Button

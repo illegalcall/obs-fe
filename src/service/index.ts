@@ -95,4 +95,14 @@ export class APIService {
     }
   }
 
+  async getAllAccounts(){
+    try {
+      const response = await axios.get(`http://localhost:8080/admin/getallacc`)
+      return response.data
+    } catch (err) {
+      console.log(err);
+      return { err: 'something went wrong' };
+    }
+  }
+
 }

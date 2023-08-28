@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Table,
   TableBody,
@@ -11,8 +11,9 @@ import {
 import { Button } from "../ui/button"
 import { useNavigate } from 'react-router-dom'
 import { DataTable } from './accounts/DataTable'
-import { columns } from './accounts/columns'
+import { Account, columns } from './accounts/columns'
 import AdminLayout from "./AdminLayout"
+import { APIService } from '@/service'
 
 const accounts = [
   {
@@ -39,7 +40,16 @@ const accounts = [
 ]
 
 const ListAccounts = () => {
+  const apiService = new APIService()
   const navigate = useNavigate()
+  const [accData, setAccData]=useState<Account[]>([])
+
+  useEffect(()=>{
+    apiService.getAllAccounts().then((d)=>{
+      setAccData(d)
+    })
+  },[])
+  
   const handleApprove = (accountId: string) => {
     console.log(accountId)
   }
@@ -50,7 +60,7 @@ const ListAccounts = () => {
     navigate(`/admin/${accountId}/transactions`)
   }
 
-  return <AdminLayout><DataTable columns={columns} data={accounts} /></AdminLayout>
+  return <AdminLayout><DataTable columns={columns} data={accData} /></AdminLayout>
 
   return <DataTable columns={columns} data={accounts} />
 
