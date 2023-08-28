@@ -10,17 +10,20 @@ import { useToast } from "../../ui/use-toast"
 import { withdrawalFormSchema } from "@/types"
 import { APIService } from "@/service"
 import { useNavigate } from "react-router-dom"
+import { useStore } from '@/store'
 
 const Withdrawal = () => {
   const { toast } = useToast()
   const apiService = new APIService()
   const navigate = useNavigate()
   const [withdrawalResponse, setWithdrawalResponse] = useState()
+  const [accountId] = useStore((state) => [state.accountId])
 
   const form = useForm<z.infer<typeof withdrawalFormSchema>>({
     resolver: zodResolver(withdrawalFormSchema),
     defaultValues: {
       amount: 0,
+      netbankingId:accountId
     },
   })
 

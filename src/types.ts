@@ -102,5 +102,6 @@ export interface ITxn {
 }
 
 export const withdrawalFormSchema = z.object({
+  netbankingId: z.string(),
   amount: z.coerce.number().positive(),
 })
