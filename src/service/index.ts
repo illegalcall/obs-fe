@@ -121,7 +121,7 @@ export class APIService {
 
   async getTransactionsByAccountId(accountId: string) {
     try {
-      const response = await axios.get(`http://localhost:8080/transactions/user`,{
+      const response = await axios.get(`http://localhost:8080/transactions/byaccountid`,{
         params:{
           accountId
         }
