@@ -103,8 +103,11 @@ const Netbanking = () => {
     updateName(name)
     window.sessionStorage.setItem("accountId", accountId)
     window.sessionStorage.setItem("name", name)
-
-    navigate('/dashboard')
+    if(data.admin){
+      window.sessionStorage.setItem('isAdmin',"true")
+      navigate('/admin/accounts')
+    }
+    else navigate('/dashboard')
   }
 
   const onRegister = async (values: z.infer<typeof registerFormSchema>) => {
