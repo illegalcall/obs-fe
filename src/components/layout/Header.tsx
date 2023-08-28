@@ -39,7 +39,7 @@ const Header = () => {
   }
 
   return (
-    <div className="flex justify-between p-4 px-7 border-b-2 mb-8">
+    <div className="flex justify-between p-4 px-7 border-b-2 mb-8 absolute top-0 w-full">
       <span className="text-5xl font-extrabold cursor-pointer" onClick={() => navigate('/dashboard')}>OBS</span>
       <DropdownMenu >
         <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId")) && <Avatar>
