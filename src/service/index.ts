@@ -119,5 +119,19 @@ export class APIService {
     }
   }
 
+  async getTransactionsByAccountId(accountId: string) {
+    try {
+      const response = await axios.get(`http://localhost:8080/transactions/user`,{
+        params:{
+          accountId
+        }
+      })
+      return response.data
+    } catch (err) {
+      console.log(err);
+      return { err: 'something went wrong' };
+    }
+  }
+
 
 }

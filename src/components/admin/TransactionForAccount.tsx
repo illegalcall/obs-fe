@@ -37,7 +37,7 @@ const TransactionForAccount: React.FC<Props> = ({ data, accId }) => {
   }, [])
   useEffect(() => {
     if (accountId && !data) {
-      apiService.getTransactions(accountId).then((d) => {
+      apiService.getTransactionsByAccountId(accountId).then((d) => {
         console.log('data =', d)
         setTxnData(d)
       })
