@@ -87,7 +87,7 @@ export class APIService {
 
   async withdrawal(values: z.infer<typeof withdrawalFormSchema>){
     try {
-      const response = await axios.post(`http://localhost:8080/withdraw`, values)
+      const response = await axios.post(`http://localhost:8080/transactions/withdraw`, values)
       return response.data
     } catch (err) {
       console.log(err);
