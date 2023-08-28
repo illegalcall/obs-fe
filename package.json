@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "cypress": "^12.17.4"
   }
 }
