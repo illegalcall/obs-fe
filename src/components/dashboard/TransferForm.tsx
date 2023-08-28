@@ -71,6 +71,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
     defaultValues: {
       accountId: "",
       name: "",
+      netbankingIdOfPayee:""
     },
   })
 
@@ -96,6 +97,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
         event.stopPropagation()
       }
     }
+    //TODO: Add netbanking payee id to add beneficiary form
 
     return addBeneficiaryForm.handleSubmit(async (values) => {
       setBeneficiaryOpen(false)

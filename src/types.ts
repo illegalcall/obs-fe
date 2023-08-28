@@ -70,6 +70,7 @@ export const addBeneficiaryFormSchema = z.object({
   accountId: z.string().min(5, {
     message: "Account number must be at least 5 characters.",
   }),
+  netbankingIdOfPayee: z.string()
 })
 
 export const resetPasswordSchema = z.object({

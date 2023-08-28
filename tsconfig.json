@@ -30,5 +30,6 @@
     "src",
     "**/*.ts",
     "**/*.tsx",
-  ]
+    "src/custom.d.ts"
+  ],
 }
