@@ -8,13 +8,13 @@ import { Toaster } from "@/components/ui/toaster"
 import AccountRegistrationSuccess from "./components/signin/AccountRegistrationSuccess"
 import Dashboard from "./components/dashboard"
 import Welcome from "./components/Welcome"
-import AccountDetails from "./components/dashboard/AccountDetails"
 import FundTransfer from "./components/dashboard/FundTransfer"
 import ListAccounts from "./components/admin/ListAccounts"
 import Profile from "./components/layout/Profile"
 import TransactionForAccount from "./components/admin/TransactionForAccount"
 import Withdrawal from "./components/dashboard/withdrawal"
 import AdminLayout from "./components/admin/AdminLayout"
+import Transactions from "./components/dashboard/Transactions"
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
           <Route path="/account-registration-success/:netbankingId" element={<AccountRegistrationSuccess />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/withdrawal" element={<Withdrawal />} />
-          <Route path="/account-details" element={<AccountDetails />} />
+          <Route path="/transactions" element={<Transactions />} />
           <Route path="/fund-transfer" element={<FundTransfer />} />
           <Route path="/admin/accounts" element={<ListAccounts />} />
           <Route path="/profile/:netbankingId" element={<Profile />} />

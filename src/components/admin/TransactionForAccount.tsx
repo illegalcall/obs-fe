@@ -48,7 +48,7 @@ const TransactionForAccount: React.FC<Props> = ({ data, accId }) => {
   return (
     <div>
       <h1 className="text-2xl font-bold ">Transactions</h1>
-      Transaction For Account :{accountId}
+      Transaction For Account: {accountId}
       <TransactionsDataTable columns={columns} data={txnData} />
     </div >
   )
