@@ -66,12 +66,32 @@ const Withdrawal = () => {
     )
   }
 
+  if(!withdrawalResponse){
+    return (
+      <DashboardLayout>
+        <h1 className="text-2xl font-bold ">Withdrawal</h1>
+        <div className="">
+          <WithdrawalForm />
+        </div>
+      </DashboardLayout>
+    )
+  }
+
   const SuccessfulWithdrawal = () => {
     return (
       <div>
         <h2 className="mt-5 text-xl font-bold text-gray-900 dark:text-white">Successfully withdrawn</h2>
-        <p className="text-md ">Withdrawal Request Id: {withdrawalResponse?.['id']}</p>
+        <p className="text-md ">Withdrawal Request Id: {withdrawalResponse?.['withdrawid']}</p>
         <p className="">Amount: {withdrawalResponse?.['amount']}</p>
+      </div>
+    )
+  }
+
+  const ErrorWithdrawal = () => {
+    return (
+      <div>
+      
+        <p className="text-md font-bold text-red-500">Error occured: {withdrawalResponse?.['msg']}</p>
       </div>
     )
   }
@@ -80,7 +100,7 @@ const Withdrawal = () => {
     <DashboardLayout>
       <h1 className="text-2xl font-bold ">Withdrawal</h1>
       <div className="">
-        {withdrawalResponse ? <SuccessfulWithdrawal /> : <WithdrawalForm />}
+        {withdrawalResponse?.['msg'] ?<ErrorWithdrawal />: <SuccessfulWithdrawal />}
 
       </div>
     </DashboardLayout>
