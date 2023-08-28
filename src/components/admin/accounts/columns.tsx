@@ -12,6 +12,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useNavigate } from "react-router-dom"
+import { APIService } from "@/service"
+import { AccountStatus } from "@/types"
 
 export type Account = {
   accountId: string
@@ -22,6 +24,9 @@ export type Account = {
 
 const Actions = ({ account }: { account: any }) => {
   const navigate = useNavigate()
+  const apiService = new APIService()
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,8 +39,8 @@ const Actions = ({ account }: { account: any }) => {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem onClick={() => navigate(`/admin/${account.accountId}/transactions`)}>View Transactions</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Approve</DropdownMenuItem>
-        <DropdownMenuItem>Reject</DropdownMenuItem>
+        <DropdownMenuItem onClick={()=> apiService.approveAccount(account.accountId, AccountStatus.ACCEPTED)}>Approve</DropdownMenuItem>
+        <DropdownMenuItem onClick={()=> apiService.approveAccount(account.accountId, AccountStatus.REJECTED)}><span className="text-red-400">Reject</span></DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

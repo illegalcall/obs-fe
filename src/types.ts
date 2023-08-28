@@ -105,3 +105,10 @@ export const withdrawalFormSchema = z.object({
   netbankingId: z.string(),
   amount: z.coerce.number().positive(),
 })
+
+
+export enum AccountStatus{
+  PENDING='PENDING',
+  ACCEPTED='ACCEPTED',
+  REJECTED='REJECTED'
+}
