@@ -2,6 +2,7 @@ import Copy from "@/icons/Copy"
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from "@/components/ui/use-toast"
+import withAuth from "../withAuth"
 
 
 
@@ -35,4 +36,4 @@ const AccountCreationSuccess = () => {
   )
 }
 
-export default AccountCreationSuccess
+export default withAuth(AccountCreationSuccess)

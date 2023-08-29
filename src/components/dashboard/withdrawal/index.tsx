@@ -11,6 +11,7 @@ import { withdrawalFormSchema } from "@/types"
 import { APIService } from "@/service"
 import { useNavigate } from "react-router-dom"
 import { useStore } from '@/store'
+import withAuth from "@/components/withAuth"
 
 const Withdrawal = () => {
   const { toast } = useToast()
@@ -23,7 +24,7 @@ const Withdrawal = () => {
     resolver: zodResolver(withdrawalFormSchema),
     defaultValues: {
       amount: 0,
-      netbankingId:accountId
+      netbankingId: accountId
     },
   })
 
@@ -32,7 +33,7 @@ const Withdrawal = () => {
   // },[accountId])
 
   function onSubmit(values: z.infer<typeof withdrawalFormSchema>) {
-    form.setValue("netbankingId",accountId)
+    form.setValue("netbankingId", accountId)
     toast({
       title: 'Withdrawal request submitted'
     })
@@ -71,7 +72,7 @@ const Withdrawal = () => {
     )
   }
 
-  if(!withdrawalResponse){
+  if (!withdrawalResponse) {
     return (
       <DashboardLayout>
         <h1 className="text-2xl font-bold ">Withdrawal</h1>
@@ -95,7 +96,7 @@ const Withdrawal = () => {
   const ErrorWithdrawal = () => {
     return (
       <div>
-      
+
         <p className="text-md font-bold text-red-500">Error occured: {withdrawalResponse?.['msg']}</p>
       </div>
     )
@@ -105,11 +106,11 @@ const Withdrawal = () => {
     <DashboardLayout>
       <h1 className="text-2xl font-bold ">Withdrawal</h1>
       <div className="">
-        {withdrawalResponse?.['msg'] ?<ErrorWithdrawal />: <SuccessfulWithdrawal />}
+        {withdrawalResponse?.['msg'] ? <ErrorWithdrawal /> : <SuccessfulWithdrawal />}
 
       </div>
     </DashboardLayout>
   )
 }
 
-export default Withdrawal
+export default withAuth(Withdrawal)

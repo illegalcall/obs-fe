@@ -5,6 +5,7 @@ import { APIService } from "@/service"
 import { ITxn } from "@/types"
 import { useLocation } from "react-router-dom"
 import { TransactionsDataTable } from "./accounts/TransactionsDataTable"
+import withAuth from "../withAuth"
 
 interface Props {
   data?: ITxn[]
@@ -54,4 +55,4 @@ const TransactionForAccount: React.FC<Props> = ({ data, accId }) => {
   )
 }
 
-export default TransactionForAccount
+export default withAuth(TransactionForAccount)

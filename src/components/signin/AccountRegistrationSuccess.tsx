@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from "@/components/ui/use-toast"
 import { useStore } from "@/store"
+import withAuth from "../withAuth"
 
 
 const AccountRegistrationSuccess = () => {
@@ -30,4 +31,4 @@ const AccountRegistrationSuccess = () => {
   )
 }
 
-export default AccountRegistrationSuccess
+export default withAuth(AccountRegistrationSuccess)
