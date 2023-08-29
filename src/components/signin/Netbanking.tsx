@@ -103,10 +103,10 @@ const Netbanking = () => {
     updateName(name)
     window.sessionStorage.setItem("accountId", accountId)
     window.sessionStorage.setItem("name", name)
-    
-    if(data.admin){
-      console.log('data',data)
-      window.sessionStorage.setItem('isAdmin',"true")
+
+    if (data.admin) {
+      console.log('data', data)
+      window.sessionStorage.setItem('isAdmin', "true")
       navigate('/admin/accounts')
     }
     else navigate('/dashboard')
@@ -148,8 +148,8 @@ const Netbanking = () => {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Form {...loginForm}>
-                <form onSubmit={loginForm.handleSubmit(onLogin)} className="space-y-8">
+              <Form {...loginForm} >
+                <form onSubmit={loginForm.handleSubmit(onLogin)} className="space-y-8" data-cy="login-input-form">
                   <FormField
                     control={loginForm.control}
                     name="netbankingId"
@@ -157,7 +157,7 @@ const Netbanking = () => {
                       <FormItem>
                         <FormLabel>User id</FormLabel>
                         <FormControl>
-                          <Input {...field} />
+                          <Input {...field} data-cy="login-input-form-userId" />
                         </FormControl>
                         <FormDescription>
                           This is your netbanking user id.
@@ -173,7 +173,7 @@ const Netbanking = () => {
                       <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input {...field} />
+                          <Input {...field} type="password" data-cy="login-input-form-password" />
                         </FormControl>
                         <FormDescription>
                           This is your netbanking password.
@@ -182,7 +182,7 @@ const Netbanking = () => {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit">Login</Button>
+                  <Button type="submit" data-cy="login-input-form-login-button">Login</Button>
                 </form>
               </Form>
             </div>

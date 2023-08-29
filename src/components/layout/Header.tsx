@@ -39,13 +39,15 @@ const Header = () => {
   }
 
   return (
-    <div className="flex justify-between p-4 px-7 border-b-2 mb-8">
-      <span className="text-5xl font-extrabold cursor-pointer" onClick={() => navigate('/dashboard')}>OBS</span>
+    <div className="bg-primary flex justify-between p-4 px-7 border-b-2 mb-8 absolute top-0 w-full">
+      <span className="text-5xl cursor-pointer" style={{ fontFamily: "Montserrat, sans-serif" }} onClick={() => navigate('/dashboard')}>WFH</span>
       <DropdownMenu >
-        <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId")) && <Avatar>
-          {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-          <AvatarFallback>{getName()}</AvatarFallback>
-        </Avatar>}</DropdownMenuTrigger>
+        <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId"))
+          && <Avatar>
+            <AvatarFallback className="bg-yellow-500"><span className="text-black">{'HW'}</span></AvatarFallback>
+          </Avatar>}
+
+        </DropdownMenuTrigger>
         <DropdownMenuContent >
           <DropdownMenuLabel>{name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
