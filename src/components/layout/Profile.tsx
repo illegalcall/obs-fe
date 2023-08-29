@@ -23,8 +23,15 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { resetPasswordSchema, resetTxnPasswordSchema } from '@/types'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import { APIService } from '@/service'
+import { useStore } from '@/store'
+import { toast } from '../ui/use-toast'
 
 const Profile = () => {
+  const apiService = new APIService()
+  const [accountId] = useStore(
+    (state) => [state.accountId],
+  )
   const resetPasswordForm = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
@@ -43,11 +50,29 @@ const Profile = () => {
   function onResetPasswordSubmit(values: z.infer<typeof resetPasswordSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    apiService.resetPass(accountId,values.password).then((d)=>{
+      toast({
+        title:"Login Password updated successfully"
+      })
+    }).catch((e)=>{
+      toast({
+        title:"Error occured"
+      })
+    })
     console.log(values)
   }
   function onResetTxnPasswordSubmit(values: z.infer<typeof resetTxnPasswordSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    apiService.resetTxnPass(accountId,values.transactionPassword).then((d)=>{
+      toast({
+        title:"Transaction Password updated successfully"
+      })
+    }).catch((e)=>{
+      toast({
+        title:"Error occured"
+      })
+    })
     console.log(values)
   }
 

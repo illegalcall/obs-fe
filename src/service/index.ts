@@ -159,5 +159,31 @@ export class APIService {
     }
   }
 
+  async resetPass(netbankingId: string, newPassword: string){
+    try {
+      const response = await axios.post(`http://localhost:8080/user/setloginpassword`,{
+      
+          netbankingId,
+          newPassword
+        
+      })
+      return response.data
+    } catch (err) {
+      console.log(err);
+      return { err: 'something went wrong' };
+    }
+  }
+  async resetTxnPass(netbankingId: string, newTxnPassword: string){
+    try {
+      const response = await axios.post(`http://localhost:8080/user/settxnpassword`,{
+          netbankingId,
+          newTxnPassword
+      })
+      return response.data
+    } catch (err) {
+      console.log(err);
+      return { err: 'something went wrong' };
+    }
+  }
 
 }
