@@ -159,7 +159,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Beneficiares</SelectLabel>
-                        {beneficiaries.map((b) => (<SelectItem key={b.beneficiaryAccountId} value={b.beneficiaryAccountId}>{b.beneficiaryName}</SelectItem>))}
+                        {beneficiaries.length && beneficiaries.map((b) => (<SelectItem key={b.beneficiaryAccountId} value={b.beneficiaryAccountId}>{b.beneficiaryName}</SelectItem>))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
