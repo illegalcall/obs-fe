@@ -107,11 +107,13 @@ export class APIService {
 
   async approveAccount(accountId: string, isApproved: string){
     try {
-      const response = await axios.post(`http://localhost:8080/admin/approve/`,{
-        params:{
-          accountId, isApproved
-        }
-      })
+      const response = await axios.post(`http://localhost:8080/admin/approve/?accountId=${accountId}&isApproved=${isApproved}`
+      // ,{
+        // params:{
+        //   accountId, isApproved
+        // }
+      // }
+      )
       return response.data
     } catch (err) {
       console.log(err);
