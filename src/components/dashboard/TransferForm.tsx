@@ -102,6 +102,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
     //TODO: Add netbanking payee id to add beneficiary form
 
     return addBeneficiaryForm.handleSubmit(async (values) => {
+      addBeneficiaryForm.setValue("netbankingIdOfPayee", accountId)
       setBeneficiaryOpen(false)
       toast({
         title: "🫂 Beneficiary added",
