@@ -27,11 +27,12 @@ const Withdrawal = () => {
     },
   })
 
-  useEffect(()=>{
-    form.setValue("netbankingId",accountId)
-  },[accountId])
+  // useEffect(()=>{
+  //   form.setValue("netbankingId",accountId)
+  // },[accountId])
 
   function onSubmit(values: z.infer<typeof withdrawalFormSchema>) {
+    form.setValue("netbankingId",accountId)
     toast({
       title: 'Withdrawal request submitted'
     })
