@@ -116,6 +116,8 @@ const TransferForm = ({ type }: { type: TransferType }) => {
   }
 
   async function onSubmit(values: z.infer<typeof fundsTransferFormSchema>) {
+    fundsTransferForm.setValue("txnType", type)
+    fundsTransferForm.setValue("fromUserId", accountId)
     console.log(values)
     const res = await apiService.transfer(values)
     if (res.message) {
@@ -133,11 +135,11 @@ const TransferForm = ({ type }: { type: TransferType }) => {
         description: <div className="flex column">
           <div className="flex">
             <span className='font-semibold'>Amount:</span>
-            <span className=''>{res.amount}</span>
+            <span className=''>{res.txn.amount}</span>
           </div>
           <div className="flex">
             <span className='font-semibold'>Transaction Type:</span>
-            <span className=''>{res.txnType}</span>
+            <span className=''>{res.txn.txnType}</span>
           </div>
          
         </div>
