@@ -45,6 +45,7 @@ const Profile = () => {
       toast({
         title: "Login Password updated successfully"
       })
+      resetPasswordForm.reset()
     }).catch((e) => {
       toast({
         title: "Error occured"
@@ -56,6 +57,7 @@ const Profile = () => {
       toast({
         title: "Transaction Password updated successfully"
       })
+      resetTxnPasswordForm.reset()
     }).catch((e) => {
       toast({
         title: "Error occured"

@@ -15,7 +15,7 @@ const withAuth = (WrappedComponent: React.FunctionComponent) => {
       if (!accountId && !window.sessionStorage.getItem("accountId")) {
         navigate('/signin')
       }
-      else if (window.sessionStorage.getItem("isAdmin") === "true") {
+      else if (window.sessionStorage.getItem("isAdmin") == "true" && !window.location.href.includes("admin")) {
         navigate('/admin/accounts')
       }
       else {
