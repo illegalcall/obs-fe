@@ -103,13 +103,16 @@ const TransferForm = ({ type }: { type: TransferType }) => {
 
     return addBeneficiaryForm.handleSubmit(async (values) => {
       addBeneficiaryForm.setValue("netbankingIdOfPayee", accountId)
-      setBeneficiaryOpen(false)
+      console.log('accId',accountId)
+      
+      console.log(values)
+      apiService.addBeneficary({...values, netbankingIdOfPayee:accountId}).then((d)=>{
+        setBeneficiaries(d)
+        setBeneficiaryOpen(false)
       toast({
         title: "🫂 Beneficiary added",
       })
-      console.log(values)
-      apiService.addBeneficary(values).then((d)=>{
-        setBeneficiaries(d)
+      addBeneficiaryForm.reset()
       })
 
     })(event)
