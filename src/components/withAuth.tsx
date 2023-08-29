@@ -15,7 +15,7 @@ const withAuth = (WrappedComponent: React.FunctionComponent) => {
       if (!accountId && !window.sessionStorage.getItem("accountId")) {
         navigate('/signin')
       }
-      else if(window.sessionStorage.getItem("isAdmin")==="true"){
+      else if (window.sessionStorage.getItem("isAdmin") === "true") {
         navigate('/admin/accounts')
       }
       else {
@@ -23,6 +23,14 @@ const withAuth = (WrappedComponent: React.FunctionComponent) => {
         updateAccountId(window.sessionStorage.getItem("accountId") || "")
         updateName(window.sessionStorage.getItem("name") || "")
 
+      }
+    }, [])
+
+    // check isAdmin before accessing any admin routes
+    useEffect(() => {
+      // check if the current url contains /admin
+      if (window.location.href.includes("/admin") && window.sessionStorage.getItem("isAdmin") !== "true") {
+        navigate('/signin')
       }
     }, [])
 
