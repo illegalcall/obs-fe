@@ -4,7 +4,7 @@ const WellsLogo: React.FC<React.SVGProps<SVGSVGElement>> = (
   props: React.SVGProps<SVGSVGElement>
 ) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500px" height="280px" style={{"shapeRendering":"geometricPrecision", "textRendering":"geometricPrecision", "fill-rule":"evenodd", "clip-rule":"evenodd"}} xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500px" height="280px" style={{"shapeRendering":"geometricPrecision", "textRendering":"geometricPrecision", "fillRule":"evenodd", "clipRule":"evenodd"}} xmlnsXlink="http://www.w3.org/1999/xlink">
     <g><path style={{opacity:1}} fill="#f6f6f5" d="M -0.5,-0.5 C 166.167,-0.5 332.833,-0.5 499.5,-0.5C 499.5,92.8333 499.5,186.167 499.5,279.5C 332.833,279.5 166.167,279.5 -0.5,279.5C -0.5,186.167 -0.5,92.8333 -0.5,-0.5 Z"/></g>
     <g><path style={{opacity:1}} fill="#fcecbc" d="M 117.5,91.5 C 113.154,91.6657 108.821,91.499 104.5,91C 101.926,88.253 98.9256,87.753 95.5,89.5C 96.4919,87.9735 97.9919,87.3068 100,87.5C 102.348,87.2582 104.182,88.0916 105.5,90C 109.688,90.1762 113.688,90.6762 117.5,91.5 Z"/></g>
     <g><path style={{opacity:1}} fill="#fef4d3" d="M 77.5,88.5 C 77.5,88.8333 77.5,89.1667 77.5,89.5C 71.642,89.1778 65.9753,89.5111 60.5,90.5C 59.596,91.209 59.2627,92.209 59.5,93.5C 58.1991,92.1155 58.1991,90.6155 59.5,89C 65.4908,88.5005 71.4908,88.3338 77.5,88.5 Z"/></g>
