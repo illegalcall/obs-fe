@@ -14,6 +14,8 @@ import {
 import { useNavigate } from "react-router-dom"
 import { APIService } from "@/service"
 import { AccountStatus } from "@/types"
+import { Badge } from "@/components/ui/badge"
+
 
 export type Account = {
   accountId: string
@@ -39,8 +41,8 @@ const Actions = ({ account }: { account: any }) => {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem onClick={() => navigate(`/admin/${account.accountId}/transactions`)}>View Transactions</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={()=> apiService.approveAccount(account.accountId, AccountStatus.ACCEPTED)}>Approve</DropdownMenuItem>
-        <DropdownMenuItem onClick={()=> apiService.approveAccount(account.accountId, AccountStatus.REJECTED)}><span className="text-red-400">Reject</span></DropdownMenuItem>
+        <DropdownMenuItem onClick={() => apiService.approveAccount(account.accountId, AccountStatus.ACCEPTED)}>Approve</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => apiService.approveAccount(account.accountId, AccountStatus.REJECTED)}><span className="text-red-400">Reject</span></DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -84,6 +86,12 @@ export const columns: ColumnDef<Account>[] = [
         </Button>
       )
     },
+    cell: ({ cell }) => {
+      if (!cell.getValue()) {
+        return <Badge variant="outline">PENDING</Badge>
+      }
+      return <Badge variant="outline"><>{cell.getValue()}</></Badge>
+    }
   },
   {
     id: "actions",

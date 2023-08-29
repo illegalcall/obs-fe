@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useNavigate } from "react-router-dom"
+import { Badge } from "@/components/ui/badge"
 
 interface ITxn {
   transactionId: string
@@ -52,6 +53,9 @@ export const columns: ColumnDef<ITxn>[] = [
         </Button>
       )
     },
+    cell: ({ cell }) => {
+      return <Badge variant="outline"><>{cell.getValue()}</></Badge>
+    }
   },
   {
     accessorKey: "completedAt",
