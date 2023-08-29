@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom"
 
 const Header = () => {
   const navigate = useNavigate()
-  //TODO: use store to see if user is logged in
   const [accountId, name, updateAccountId, updateName] = useStore(
     (state) => [state.accountId, state.name, state.updateAccountId, state.updateName],
   )
@@ -25,6 +24,7 @@ const Header = () => {
     updateName("")
     window.sessionStorage.removeItem("accountId")
     window.sessionStorage.removeItem("name")
+    window.sessionStorage.removeItem('isAdmin')
     navigate("/signin")
   }
 
