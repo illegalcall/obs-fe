@@ -28,8 +28,8 @@ const Dashboard = () => {
   useEffect(() => {
     if (accountId === "") return
     apiService.getAccountDetails(accountId).then((res) => {
-      const { fullName, createdAt, balance, accountNumber } = res
-      setAccountDetails({ name: fullName, activeSince: createdAt, balance, accountNumber })
+      const { fullName, createdAt, balance } = res
+      setAccountDetails({ name: fullName, activeSince: createdAt, balance, accountNumber : res.accountId })
       setLoading(false)
     })
   }, [accountId])
