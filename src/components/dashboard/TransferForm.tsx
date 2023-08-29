@@ -76,8 +76,8 @@ const TransferForm = ({ type }: { type: TransferType }) => {
   const [beneficiaries, setBeneficiaries]=useState<IBeneficiary[]>([])
 
   useEffect(() => {
-    fundsTransferForm.setValue("txnType", 'dasdsada')
-    fundsTransferForm.setValue("fromUserId", 'accountId')
+    fundsTransferForm.setValue("txnType", type)
+    fundsTransferForm.setValue("fromUserId", accountId)
   }, [type])
 
   useEffect(()=>{
