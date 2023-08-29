@@ -164,7 +164,7 @@ export class APIService {
       const response = await axios.post(`http://localhost:8080/user/setloginpassword`,{
       
           netbankingId,
-          newPassword
+          newLoginPassword: newPassword
         
       })
       return response.data

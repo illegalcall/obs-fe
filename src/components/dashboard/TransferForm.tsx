@@ -44,9 +44,9 @@ import {
 import { Label } from '../ui/label'
 
 interface IBeneficiary {
-  netbankingIdofPayee: string;
-  beneficiaryAccountId: string;
-  beneficiaryName: string;
+  netbankingIdofPayee: string
+  beneficiaryAccountId: string
+  beneficiaryName: string
 }
 
 const TransferForm = ({ type }: { type: TransferType }) => {
@@ -59,6 +59,7 @@ const TransferForm = ({ type }: { type: TransferType }) => {
       toUserId: "",
       amount: 0,
       remarks: "",
+      txnPassword: ""
     },
   })
   const addBeneficiaryForm = useForm<z.infer<typeof addBeneficiaryFormSchema>>({
@@ -66,25 +67,25 @@ const TransferForm = ({ type }: { type: TransferType }) => {
     defaultValues: {
       accountId: "",
       name: "",
-      netbankingIdOfPayee:""
+      netbankingIdOfPayee: ""
     },
   })
 
   const [beneficiaryOpen, setBeneficiaryOpen] = useState(false)
   const { toast } = useToast()
   const [accountId] = useStore((state) => [state.accountId])
-  const [beneficiaries, setBeneficiaries]=useState<IBeneficiary[]>([])
+  const [beneficiaries, setBeneficiaries] = useState<IBeneficiary[]>([])
 
   useEffect(() => {
     fundsTransferForm.setValue("txnType", type)
     fundsTransferForm.setValue("fromUserId", accountId)
   }, [type])
 
-  useEffect(()=>{
-    if(accountId) apiService.getBeneficary(accountId).then((data)=>{
+  useEffect(() => {
+    if (accountId) apiService.getBeneficary(accountId).then((data) => {
       setBeneficiaries(data)
     })
-  },[accountId])
+  }, [accountId])
 
 
   const onBeneficiarySubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -103,16 +104,16 @@ const TransferForm = ({ type }: { type: TransferType }) => {
 
     return addBeneficiaryForm.handleSubmit(async (values) => {
       addBeneficiaryForm.setValue("netbankingIdOfPayee", accountId)
-      console.log('accId',accountId)
-      
+      console.log('accId', accountId)
+
       console.log(values)
-      apiService.addBeneficary({...values, netbankingIdOfPayee:accountId}).then((d)=>{
+      apiService.addBeneficary({ ...values, netbankingIdOfPayee: accountId }).then((d) => {
         setBeneficiaries(d)
         setBeneficiaryOpen(false)
-      toast({
-        title: "🫂 Beneficiary added",
-      })
-      addBeneficiaryForm.reset()
+        toast({
+          title: "🫂 Beneficiary added",
+        })
+        addBeneficiaryForm.reset()
       })
 
     })(event)

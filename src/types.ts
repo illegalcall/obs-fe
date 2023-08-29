@@ -63,6 +63,7 @@ export const fundsTransferFormSchema = z.object({
   }),
   amount: z.coerce.number().positive(),
   remarks: z.string().optional(),
+  txnPassword: z.string()
 })
 
 export const addBeneficiaryFormSchema = z.object({
