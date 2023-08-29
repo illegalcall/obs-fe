@@ -276,6 +276,22 @@ const TransferForm = ({ type }: { type: TransferType }) => {
               </FormItem>
             )}
           />
+          <FormField
+            control={fundsTransferForm.control}
+            name="txnPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Transaction Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} type="password" />
+                </FormControl>
+                <FormDescription>
+                  Transaction password of your account.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <Button type="submit">Submit</Button>
         </form>
