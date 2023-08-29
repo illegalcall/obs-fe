@@ -13,8 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useNavigate } from "react-router-dom"
 
-
-
 const Header = () => {
   const navigate = useNavigate()
   //TODO: use store to see if user is logged in
@@ -44,7 +42,7 @@ const Header = () => {
       <DropdownMenu >
         <DropdownMenuTrigger>{(accountId || window.sessionStorage.getItem("accountId"))
           && <Avatar>
-            <AvatarFallback className="bg-yellow-500"><span className="text-black">{'HW'}</span></AvatarFallback>
+            <AvatarFallback className="bg-yellow-500"><span className="text-black">{getName() || 'TU'}</span></AvatarFallback>
           </Avatar>}
 
         </DropdownMenuTrigger>
