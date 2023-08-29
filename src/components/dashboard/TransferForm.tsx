@@ -129,7 +129,18 @@ const TransferForm = ({ type }: { type: TransferType }) => {
     else {
       console.log('res', res)
       toast({
-        title: "Funds transfer request submitted 💰",
+        title: "Funds transfer processed successfully 💰",
+        description: <div className="flex column">
+          <div className="flex">
+            <span className='font-semibold'>Amount:</span>
+            <span className=''>{res.amount}</span>
+          </div>
+          <div className="flex">
+            <span className='font-semibold'>Transaction Type:</span>
+            <span className=''>{res.txnType}</span>
+          </div>
+         
+        </div>
       })
       fundsTransferForm.reset()
     }
