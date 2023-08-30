@@ -13,6 +13,7 @@ const withAuth = (WrappedComponent: React.FunctionComponent) => {
     // If no accountId was found, redirect to login page.
     useEffect(() => {
       if (!accountId && !window.sessionStorage.getItem("accountId")) {
+        if(!window.location.href.includes("account-registration-success") && !window.location.href.includes("account-creation-success"))
         navigate('/signin')
       }
       else if (window.sessionStorage.getItem("isAdmin") == "true" && !window.location.href.includes("admin")) {
